@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="css/main.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+	<script src="js/progressbar.js"></script>
+
+	<link rel="stylesheet" href="css/progressbar.css">
+	<link rel="stylesheet" href="css/tiny-green/progressbar.css">
+  
+  <script>
+  function pgb() {
+    document.getElementById("progressBar").classList.remove("hidden");
+    document.getElementById("pb").classList.remove("hidden");
+    
+    var passwordis = validatePassword(document.getElementById(password)).isValid;
+
+    //그냥 validatePassword 조건에 맞으면 100%로 줬고, 조건에 안맞을 때는 그냥 50%로 줬습니다. 
+    //비밀번호가 안맞다가 맞게 되면 progressbar의 애니메이션 효과 때문에 50% 에서 100% 로 바뀌는데 시간이 좀 걸립니다.
+    if(passwordis == true) {
+      progressBar(100, $('#progressBar'));
+      document.getElementById("pb").innerHTML = "great";
+    }else{
+      progressBar(50, $('#progressBar'));
+      document.getElementById("pb").innerHTML = "weak";
+
+    }
+  }
+   </script>
+</head>
+
+<body>
+  <!-- Content -->
+  <div class="content">
+    <div class="container-fluid">
+        <div class="form-area">
+          <form role="form">
+            <br style="clear:both">
+            <h3 style="margin-bottom: 25px; text-align: center;">Registration Form</h3>
+            <div class="form-group">
+              <input type="text" class="form-control" id="id" name="id" onkeyup = "keyUpId()" placeholder="ID" required>
+	            <span class="help-block"><p id="id-check" class="help-block hidden"></p></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" onkeyup = "keyUpPassword(),pgb()" placeholder="Password" required>
+              <span class="help-block"><p id="password-check" class="help-block hidden"></p></span>
+              <div id="progressBar" class="tiny-green hidden" ><div></div></div>
+              <p id="pb" class="help-block hidden"></p>
+              
+                 
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="email" name="email" onkeyup = "keyUpEmail()" placeholder="Email" required>
+	            <span class="help-block"><p id="email-check" class="help-block hidden" ></p></span>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" type="textarea" id="message" placeholder="Greeting Message" onkeyup = "keyUpMessage()"  maxlength="140" rows="7"></textarea>
+              <span class="help-block"><p id="characterLeft" class="help-block" >140 characters left</p></span>
+            </div>
+
+            <button type="button" id="submit" name="submit" onclick="validateId(id),validatePassword(password),validateEmail(email),validateMessage(message), performSubmit()" class="btn btn-primary pull-right">Submit Form</button>
+          </form>
+        </div>
+    </div>
+  </div>
+</body>
+
+</html>
